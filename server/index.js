@@ -1,12 +1,74 @@
 import express from 'express';
-import path from 'path';
+import fetch from 'node-fetch';
+import config from './config/index';
+import adapter from './adapter';
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'build')));
+const commonOptions = {
+    timeout: config.api.timeout,
+    compress: config.api.compress
+};
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+const get = endpoint => {
+    const url = `${config.api.url}${endpoint}`;
+    const options = Object.assign({}, commonOptions, {
+        method: 'get'
+    });
+
+    console.log('FETCHING', url);
+
+    return fetch(url, options).then(res => res.json());
+};
+
+app.get('/api/items', (req, res) => {
+    const request = get(`/sites/MLA/search?q=${req.query.q}`);
+
+    request.then(response => {
+        const { author } = config.api;
+        const categories = [];
+        const items = [];
+
+        if (response.results) {
+            response.results.forEach(item => {
+                const itemAdapted = adapter(item);
+                const { category, ...itemToBeAdded } = itemAdapted;
+
+                categories.push(category);
+                items.push(itemToBeAdded);
+            });
+
+            return {
+                author,
+                categories,
+                items
+            }
+        }
+
+        return response;
+    }).then(json => res.send(JSON.stringify(json)));
 });
 
-app.listen(8080);
+app.get('/api/items/:id', (req, res) => {
+    const { id } = req.params;
+    const itemApiURL = `/items/${id}`;
+    const promises = [
+        get(itemApiURL),
+        get(`${itemApiURL}/description`)
+    ];
+
+    Promise.all(promises)
+        .then(response => {
+            const item = response[0];
+            const description = response[1];
+            const json = Object.assign({}, adapter(item), {
+                description: description && description.plain_text
+            });
+
+            res.send(JSON.stringify(json));
+        });
+});
+
+app.listen(config.port, () => {
+    console.log(`[ API-PROXY ] Running on ${config.port}`);
+});
