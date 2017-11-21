@@ -4,11 +4,11 @@ You could use NPM or Yarn, i'd recommend Yarn
 
 ## Installing Yarn
 
-Read the [Installation Guide](https://yarnpkg.com/en/docs/install) on our website for detailed instructions on how to install Yarn.
+Read the [Installation Guide](https://yarnpkg.com/en/docs/install) on their website for detailed instructions on how to install Yarn.
 
 ## Using Yarn
 
-Read the [Usage Guide](https://yarnpkg.com/en/docs/usage) on our website for detailed instructions on how to use Yarn.
+Read the [Usage Guide](https://yarnpkg.com/en/docs/usage) on their website for detailed instructions on how to use Yarn.
 
 ## Available Scripts
 
