@@ -1,9 +1,13 @@
 import express from 'express';
-import fetch from 'node-fetch';
+import fetchPonyfillModule from 'fetch-ponyfill';
 import config from './config/index';
 import adapter from './adapter';
+import morgan from 'morgan';
 
+const { fetch } = fetchPonyfillModule();
 const app = express();
+
+app.use(morgan('common'));
 
 const commonOptions = {
     timeout: config.api.timeout,
@@ -15,8 +19,6 @@ const get = endpoint => {
     const options = Object.assign({}, commonOptions, {
         method: 'get'
     });
-
-    console.log('FETCHING', url);
 
     return fetch(url, options).then(res => res.json());
 };
