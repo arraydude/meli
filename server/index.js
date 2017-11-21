@@ -3,8 +3,10 @@ import fetchPonyfillModule from 'fetch-ponyfill';
 import config from './config/index';
 import adapter from './adapter';
 import morgan from 'morgan';
+import apicache from 'apicache';
 
 const { fetch } = fetchPonyfillModule();
+const { middleware: cache } = apicache;
 const app = express();
 
 app.use(morgan('common'));
@@ -23,7 +25,7 @@ const get = endpoint => {
     return fetch(url, options).then(res => res.json());
 };
 
-app.get('/api/items', (req, res) => {
+app.get('/api/items', cache('5 minutes'), (req, res) => {
     const request = get(`/sites/MLA/search?q=${req.query.q}`);
 
     request.then(response => {
@@ -51,7 +53,7 @@ app.get('/api/items', (req, res) => {
     }).then(json => res.send(JSON.stringify(json)));
 });
 
-app.get('/api/items/:id', (req, res) => {
+app.get('/api/items/:id', cache('30 minutes'), (req, res) => {
     const { id } = req.params;
     const itemApiURL = `/items/${id}`;
     const promises = [
@@ -61,8 +63,8 @@ app.get('/api/items/:id', (req, res) => {
 
     Promise.all(promises)
         .then(response => {
-            const item = response[0];
-            const description = response[1];
+            const item = response[ 0 ];
+            const description = response[ 1 ];
             const json = Object.assign({}, adapter(item), {
                 description: description && description.plain_text
             });
