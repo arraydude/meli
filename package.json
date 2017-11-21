@@ -29,7 +29,8 @@
     "start:client": "react-scripts start",
     "build": "rm -Rf ./build && react-scripts build && build:server",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext js,jsx ."
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
