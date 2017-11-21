@@ -8,5 +8,6 @@ export default {
             name: "Nahuel",
             lastname: "Rosso"
         }
-    }
+    },
+    morgan: 'dev'
 };

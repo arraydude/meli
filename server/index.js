@@ -9,7 +9,7 @@ const { fetch } = fetchPonyfillModule();
 const { middleware: cache } = apicache;
 const app = express();
 
-app.use(morgan('common'));
+app.use(morgan(config.morgan));
 
 const commonOptions = {
     timeout: config.api.timeout,
