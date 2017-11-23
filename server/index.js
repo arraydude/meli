@@ -1,5 +1,5 @@
 import express from 'express';
-import config from './config/index';
+import config from './config';
 import morgan from 'morgan';
 import apicache from 'apicache';
 import requests from './requests';

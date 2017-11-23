@@ -4,8 +4,9 @@ import { Helmet } from 'react-helmet';
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-import Header from './components/header';
+import Header from './components/header/header';
 import Spinner from './components/spinner/spinner';
+
 import { Listing, About } from './containers';
 
 class App extends Component {

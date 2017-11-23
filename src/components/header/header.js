@@ -6,10 +6,10 @@ import { get } from '../../requests';
 import { urls } from '../../reducers/items';
 
 import { Navbar } from 'react-bootstrap';
-import Search from '../search';
+import Search from '../search/search';
 
 import logo from './assets/Logo_ML.png';
-import './style.css';
+import './header.css';
 
 class Header extends Component {
     static propTypes = {
