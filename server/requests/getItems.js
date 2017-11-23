@@ -27,7 +27,7 @@ const getItems = (req, res) => {
         }
 
         return response;
-    }).then(json => res.send(JSON.stringify(json)));
+    }).then(json => res.json(json));
 };
 
 export default getItems;

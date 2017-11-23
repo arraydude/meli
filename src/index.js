@@ -7,7 +7,6 @@ import store from './store';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import './index.css';
 
 import config from './config';
 import App from './App';

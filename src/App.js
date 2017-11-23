@@ -3,8 +3,6 @@ import { Helmet } from 'react-helmet';
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-import './App.css';
-
 import Header from './components/header';
 import { Listing, About } from './containers';
 
