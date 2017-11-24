@@ -6,8 +6,7 @@ import { Route } from 'react-router-dom';
 
 import Header from './components/header/header';
 import Spinner from './components/spinner/spinner';
-
-import { Listing, About } from './containers';
+import Listing from './containers/listing/listing';
 
 class App extends Component {
     static PropTypes = {
@@ -38,7 +37,6 @@ class App extends Component {
                 <Header/>
                 <main className="container">
                     <Route exact path="/" component={ Listing } />
-                    <Route exact path="/about" component={ About } />
                 </main>
                 { this.props.isFetching && <Spinner/> }
             </div>

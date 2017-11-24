@@ -1,7 +1,8 @@
 import { reducer } from '../reducers';
+import config from '../config';
 
 const initialStateBase = {
-    listing: {},
+    listing: [],
     categories: [],
     isFetching: false
 };
@@ -14,7 +15,7 @@ export const urls = {
 const transformItems = (state, action) => {
     const transformed = Object.assign({}, action, {
         data: {
-            listing: action.data.items,
+            listing: action.data.items.slice(0, config.numberOfItems),
             categories: action.data.categories
         }
     });
