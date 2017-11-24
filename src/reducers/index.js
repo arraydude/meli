@@ -1,11 +1,6 @@
 import { combineReducers } from 'redux';
 import items from './items';
 
-export const initialStateBase = {
-    items: {},
-    isFetching: false
-};
-
 export const reducer = (state, action) => {
     let newState;
 
@@ -17,9 +12,7 @@ export const reducer = (state, action) => {
             break;
         }
         case 'RECEIVE_ITEMS': {
-            newState = Object.assign({}, state, {
-                items: action.data,
-            }, {
+            newState = Object.assign({}, state, action.data, {
                 isFetching: false
             });
             break;
