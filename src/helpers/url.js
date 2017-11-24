@@ -1,9 +1,11 @@
+import stringModule from 'string';
+
 const paramsToQueryString = params => {
     const strParams = [];
 
     for (const param in params) {
         if (params.hasOwnProperty(param)) {
-            const queryStringParam = typeof params[param] === 'string' ? params[param] : JSON.stringify(params[param]);
+            const queryStringParam = typeof params[ param ] === 'string' ? params[ param ] : JSON.stringify(params[ param ]);
 
             strParams.push(`${param}=${encodeURIComponent(queryStringParam)}`);
         }
@@ -12,25 +14,9 @@ const paramsToQueryString = params => {
     return strParams.join('&');
 };
 
-const queryStringToParams = queryString => {
-    const response = {};
-    const decodedQS = decodeURI(queryString).split('&');
-
-    decodedQS.forEach(param => {
-        const [paramKey, paramValue] = param.split('=');
-
-        try {
-            response[paramKey] = JSON.parse(paramValue);
-        }
-        catch (e) {
-            response[paramKey] = decodeURIComponent(paramValue);
-        }
-    });
-
-    return response;
-};
+const slugify = string => stringModule(string).slugify().s;
 
 export default {
     paramsToQueryString,
-    queryStringToParams
+    slugify
 };

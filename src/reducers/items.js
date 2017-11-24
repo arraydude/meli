@@ -23,12 +23,20 @@ const transformItems = (state, action) => {
     return reducer(state, transformed);
 };
 
+const transformItem = (state, action) => {
+    const itemIndex = state.items.listing.findIndex(item => item.id === action.data.id);
+    state.items.listing[ itemIndex ].description = action.data.description;
+    action.data = {};
+
+    return reducer(state, action);
+};
+
 export default (state = initialStateBase, action) => {
     switch (action.type) {
         case 'RECEIVE_ITEMS':
             return transformItems(state, action);
         case 'RECEIVE_ITEM':
-            return reducer(state, action);
+            return transformItem(state, action);
         default:
             return reducer(state, action);
     }
