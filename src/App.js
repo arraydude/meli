@@ -2,11 +2,14 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 import Header from './components/header/header';
 import Spinner from './components/spinner/spinner';
+
 import Listing from './containers/listing/listing';
+import Detail from './containers/detail/detail';
+import NotFound from './containers/notFound/notFound';
 
 class App extends Component {
     static PropTypes = {
@@ -36,7 +39,11 @@ class App extends Component {
                 </Helmet>
                 <Header/>
                 <main className="container">
-                    <Route exact path="/" component={ Listing } />
+                    <Switch>
+                        <Route exact path="/" component={ Listing } />
+                        <Route path="/:id-:slug?" component={ Detail } />
+                        <Route component={ NotFound } />
+                    </Switch>
                 </main>
                 { this.props.isFetching && <Spinner/> }
             </div>
@@ -50,4 +57,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps, null)(App);
+export default withRouter(connect(mapStateToProps, null)(App));
