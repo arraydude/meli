@@ -38,13 +38,13 @@ class Detail extends Component {
 const mapStateToProps = (state, ownProps) => {
     return {
         item: state.items.listing.find(item => item.id === ownProps.match.params.id)
-    }
+    };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         getItem: () => dispatch(get(urls.getItem(ownProps.match.params.id), 'ITEM'))
-    }
+    };
 };
 
 const withRedux = connect(mapStateToProps, mapDispatchToProps)(Detail);

@@ -5,12 +5,14 @@ export const reducer = (state, action) => {
     let newState;
 
     switch (action.type) {
+        case 'REQUEST_ITEM':
         case 'REQUEST_ITEMS': {
             newState = Object.assign({}, state, {
                     isFetching: true
                 });
             break;
         }
+        case 'RECEIVE_ITEM':
         case 'RECEIVE_ITEMS': {
             newState = Object.assign({}, state, action.data, {
                 isFetching: false

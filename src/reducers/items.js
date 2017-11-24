@@ -24,8 +24,14 @@ const transformItems = (state, action) => {
 };
 
 const transformItem = (state, action) => {
-    const itemIndex = state.items.listing.findIndex(item => item.id === action.data.id);
-    state.items.listing[ itemIndex ].description = action.data.description;
+    const itemIndex = state.listing.findIndex(item => item.id === action.data.id);
+
+    if(itemIndex<0) {
+        state.listing.push(action.data);
+    } else {
+        state.listing[ itemIndex ].description = action.data.description;
+    }
+
     action.data = {};
 
     return reducer(state, action);
