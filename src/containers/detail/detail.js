@@ -29,7 +29,9 @@ class Detail extends Component {
     render() {
         return (
             <div>
-                caca
+                <h1>Detail page</h1>
+
+                <code>{ JSON.stringify(this.props.item) }</code>
             </div>
         );
     }
