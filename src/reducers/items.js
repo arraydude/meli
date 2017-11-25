@@ -2,6 +2,7 @@ import { reducer } from '../reducers';
 import config from '../config';
 
 const initialStateBase = {
+    elements: [],
     listing: [],
     categories: [],
     isFetching: false
@@ -13,10 +14,13 @@ export const urls = {
 };
 
 const transformItems = (state, action) => {
+    const { items, categories } = action.data;
+    const listing = action.data.items.slice(0, config.numberOfItems).map(item => item.id);
     const transformed = Object.assign({}, action, {
         data: {
-            listing: action.data.items.slice(0, config.numberOfItems),
-            categories: action.data.categories
+            listing,
+            elements: [...state.elements, ...items],
+            categories
         }
     });
 
@@ -24,12 +28,12 @@ const transformItems = (state, action) => {
 };
 
 const transformItem = (state, action) => {
-    const itemIndex = state.listing.findIndex(item => item.id === action.data.id);
+    const itemIndex = state.elements.findIndex(item => item.id === action.data.id);
 
     if(itemIndex<0) {
-        state.listing.push(action.data);
+        state.elements.push(action.data);
     } else {
-        state.listing[ itemIndex ].description = action.data.description;
+        state.elements[ itemIndex ].description = action.data.description;
     }
 
     action.data = {};

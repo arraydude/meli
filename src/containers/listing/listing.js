@@ -40,7 +40,7 @@ Listing.defaultProps = {
 
 const mapStateToProps = state => {
     return {
-        items: state.items.listing
+        items: state.items.listing.map(id => state.items.elements.find(el => el.id === id))
     }
 };
 

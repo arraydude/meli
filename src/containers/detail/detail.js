@@ -39,7 +39,7 @@ class Detail extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        item: state.items.listing.find(item => item.id === ownProps.match.params.id)
+        item: state.items.elements.find(item => item.id === ownProps.match.params.id)
     };
 };
 

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { get } from '../../requests';
 import { urls } from '../../reducers/items';
+import { withRouter } from 'react-router-dom';
 
 import { Navbar } from 'react-bootstrap';
 import Search from '../search/search';
@@ -13,7 +14,8 @@ import './header.css';
 
 class Header extends Component {
     static propTypes = {
-        getItems: PropTypes.func
+        getItems: PropTypes.func,
+        history: PropTypes.object.isRequired
     };
 
     static defaultProps = {
@@ -30,6 +32,7 @@ class Header extends Component {
 
     onChangeSearch(value) {
         this.props.getItems(value);
+        this.props.history.push('/');
     }
 
     render() {
@@ -54,4 +57,7 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(null, mapDispatchToProps)(Header);
+const withRedux = connect(null, mapDispatchToProps)(Header);
+const component = withRouter(withRedux);
+
+export default component;
