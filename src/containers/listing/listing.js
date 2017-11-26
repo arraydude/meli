@@ -5,29 +5,25 @@ import { Link } from 'react-router-dom';
 import urlHelper from '../../helpers/url';
 import { withRouter } from 'react-router-dom';
 
-import { ListGroup, ListGroupItem, Media } from 'react-bootstrap';
-
 import './listing.css';
 
 const Listing = ({ items }) => (
-    <ListGroup>
+    <ul className='listing'>
         {items.map(item => (
-            <Link to={`/${ item.id }-${ urlHelper.slugify(item.title) }`} key={item.id}>
-                <ListGroupItem>
-                    <Media>
-                        <Media.Left>
-                            <img className='listing-thumbnail' width={90} height={90} src={item.picture}
-                                 alt={item.title}/>
-                        </Media.Left>
-                        <Media.Body>
-                            <Media.Heading>{item.price.currency} {item.price.amount}</Media.Heading>
-                            <p>{item.title}</p>
-                        </Media.Body>
-                    </Media>
-                </ListGroupItem>
-            </Link>
+            <li className='listing-item'>
+                <Link to={`/${ item.id }-${ urlHelper.slugify(item.title) }`} key={item.id}>
+                    <div className='leftColumn'>
+                        <img className='listing-thumbnail' width={90} height={90} src={item.picture}
+                             alt={item.title}/>
+                    </div>
+                    <div className='rightColumn'>
+                        <p className='listing-itemTitle'>{item.title}</p>
+                        <p className='listing-itemPrice'>{item.price.currency} {item.price.amount}</p>
+                    </div>
+                </Link>
+            </li>
         ))}
-    </ListGroup>
+    </ul>
 );
 
 Listing.propTypes = {
