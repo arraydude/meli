@@ -5,6 +5,8 @@ import { urls } from '../../reducers/items';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
+import { PageHeader, Grid, Row, Col, Image, Alert } from 'react-bootstrap';
+
 import './detail.css';
 
 class Detail extends Component {
@@ -18,6 +20,15 @@ class Detail extends Component {
         item: {}
     };
 
+    constructor(props) {
+        super(props);
+
+        this.translations = {
+            'used': 'usado',
+            'new': 'nuevo'
+        }
+    }
+
     componentWillMount() {
         const { item } = this.props;
 
@@ -27,12 +38,31 @@ class Detail extends Component {
     }
 
     render() {
-        return (
-            <div>
-                <h1>Detail page</h1>
+        if (!Object.keys(this.props.item).length) {
+            return false;
+        }
 
-                <code>{ JSON.stringify(this.props.item) }</code>
-            </div>
+        const { title, picture, description, condition, free_shipping, price } = this.props.item;
+
+        return (
+            <Grid className='detail'>
+                <Row>
+                    <Col xs={12} md={8}>
+                        <Image src={ picture } responsive={ true } className='detail-picture' />
+                    </Col>
+                    <Col xs={6} md={4} className='detail-rightColumn'>
+                        <p className='detail-condition'>{ this.translations[condition] } </p>
+                        <h3>{ title }</h3>
+                        { price && <p className='detail-price'>$ { price.amount.toLocaleString() }</p> }
+                        { free_shipping && <Alert bsStyle="success" className='detail-freeShipping'><h4>Envio Gratuito!</h4></Alert> }
+                    </Col>
+                </Row>
+                <Row className='detail-description'>
+                    <Col>
+                        <p>{ description }</p>
+                    </Col>
+                </Row>
+            </Grid>
         );
     }
 }

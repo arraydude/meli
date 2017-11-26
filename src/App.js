@@ -11,6 +11,8 @@ import Listing from './containers/listing/listing';
 import Detail from './containers/detail/detail';
 import NotFound from './containers/notFound/notFound';
 
+import './index.css';
+
 class App extends Component {
     static PropTypes = {
         config: PropTypes.object.isRequired,
