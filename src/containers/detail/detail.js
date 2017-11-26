@@ -54,7 +54,7 @@ class Detail extends Component {
                         <p className='detail-condition'>{ this.translations[condition] } </p>
                         <h3>{ title }</h3>
                         { price && <p className='detail-price'>$ { price.amount.toLocaleString() }</p> }
-                        { free_shipping && <Alert bsStyle="success" className='detail-freeShipping'><h4>Envio Gratuito!</h4></Alert> }
+                        { free_shipping && <Alert bsStyle="success" className='detail-freeShipping'>Envio Gratuito!</Alert> }
                     </Col>
                 </Row>
                 <Row className='detail-description'>
