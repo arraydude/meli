@@ -5,7 +5,7 @@ import { urls } from '../../reducers/items';
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { PageHeader, Grid, Row, Col, Image, Alert } from 'react-bootstrap';
+import { Grid, Row, Col, Image, Alert } from 'react-bootstrap';
 
 import './detail.css';
 
