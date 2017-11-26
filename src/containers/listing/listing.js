@@ -10,17 +10,19 @@ import './listing.css';
 const Listing = ({ items }) => (
     <ul className='listing'>
         {items.map(item => (
-            <li className='listing-item'>
-                <Link to={`/${ item.id }-${ urlHelper.slugify(item.title) }`} key={item.id}>
-                    <div className='leftColumn'>
+            <li className='listing-item' key={item.id}>
+                <div className='leftColumn'>
+                    <Link to={`/${ item.id }-${ urlHelper.slugify(item.title) }`}>
                         <img className='listing-thumbnail' width={90} height={90} src={item.picture}
                              alt={item.title}/>
-                    </div>
-                    <div className='rightColumn'>
+                    </Link>
+                </div>
+                <div className='rightColumn'>
+                    <Link to={`/${ item.id }-${ urlHelper.slugify(item.title) }`}>
                         <p className='listing-itemTitle'>{item.title}</p>
-                        <p className='listing-itemPrice'>{item.price.currency} {item.price.amount}</p>
-                    </div>
-                </Link>
+                    </Link>
+                    <p className='listing-itemPrice'>{item.price.currency} {item.price.amount}</p>
+                </div>
             </li>
         ))}
     </ul>

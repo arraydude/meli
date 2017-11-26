@@ -2,42 +2,45 @@
     border-radius: 4px;
     margin-bottom: 50px;
     background-color: #fff;
+    padding-right: 40px;
 
     .listing-item {
         list-style: none;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
         color: #333;
-        padding: 24px;
         font-size: 20px;
         border-bottom: 1px solid #eee;
+        padding: 20px 0 20px 0;
 
         a {
-            display: flex;
-            align-items: center;
             color: inherit;
-            flex-direction: row;
 
             &:hover {
                 text-decoration: none;
             }
+        }
 
-            .listing-thumbnail {
-                border-radius: 4px;
-                height: 160px;
-                margin-right: 24px;
-                min-width: 160px;
-                overflow: hidden;
-                width: 160px;
-                vertical-align: baseline;
+        .listing-thumbnail {
+            border-radius: 4px;
+            height: 160px;
+            margin-right: 24px;
+            min-width: 160px;
+            overflow: hidden;
+            width: 160px;
+            vertical-align: baseline;
+        }
+
+        .rightColumn {
+            align-self: flex-start;
+
+            .listing-itemTitle {
+                font-weight: 300;
             }
 
-            .rightColumn {
-                .listing-itemTitle {
-                    font-weight: 300;
-                }
-
-                .listing-itemPrice {
-                    font-weight: 400;
-                }
+            .listing-itemPrice {
+                font-weight: 400;
             }
         }
     }
