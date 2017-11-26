@@ -47,7 +47,7 @@ class Detail extends Component {
         return (
             <Grid className='detail'>
                 <Row>
-                    <Col xs={12} md={8}>
+                    <Col xs={12} md={8} className='detail-leftColumn'>
                         <Image src={ picture } responsive={ true } className='detail-picture' />
                     </Col>
                     <Col xs={6} md={4} className='detail-rightColumn'>

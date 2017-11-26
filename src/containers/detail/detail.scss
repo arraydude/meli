@@ -2,9 +2,21 @@
     background-color: white;
     border-radius: 4px;
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.3);
+    border: 1px solid #ddd;
+    margin-bottom: 100px;
+
+
+    .detail-leftColumn {
+        padding: 0 32px;
+        border-right: 1px solid #ddd;
+
+        .detail-picture {
+            width: 100%;
+        }
+    }
 
     .detail-rightColumn {
-        padding: 32px;
+        padding: 44px 32px;
 
         .detail-price {
             font-size: 44px;
@@ -26,11 +38,6 @@
                 margin: 32px 0 0 0;
             }
         }
-    }
-
-    .detail-picture {
-        width: 100%;
-        margin: 0 32px;
     }
 
     .detail-description {
