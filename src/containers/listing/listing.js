@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
+import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -7,34 +8,40 @@ import { withRouter } from 'react-router-dom';
 
 import './listing.css';
 
-const Listing = ({ items }) => (
-    <ul className='listing'>
-        {items.map(item => (
-            <li className='listing-item' key={item.id}>
-                <div className='leftColumn'>
-                    <Link to={`/${ item.id }-${ urlHelper.slugify(item.title) }`}>
-                        <img className='listing-thumbnail' width={90} height={90} src={item.picture}
-                             alt={item.title}/>
-                    </Link>
-                </div>
-                <div className='rightColumn'>
-                    <Link to={`/${ item.id }-${ urlHelper.slugify(item.title) }`}>
-                        <p className='listing-itemTitle'>{item.title}</p>
-                    </Link>
-                    <p className='listing-itemPrice'>{item.price.currency} {item.price.amount}</p>
-                </div>
-            </li>
-        ))}
-    </ul>
-);
+class Listing extends PureComponent {
+    static propTypes = {
+        items: PropTypes.arrayOf(PropTypes.object)
+    };
 
-Listing.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.object)
-};
+    static defaultProps = {
+        items: []
+    };
 
-Listing.defaultProps = {
-    items: []
-};
+    render() {
+        const { items } = this.props;
+
+        return (
+          <ul className='listing'>
+              { items.map(item => (
+                <li className='listing-item' key={ item.id }>
+                    <div className='leftColumn'>
+                        <Link to={ `/${ item.id }-${ urlHelper.slugify(item.title) }` }>
+                            <img className='listing-thumbnail' width={ 90 } height={ 90 } src={ item.picture }
+                                 alt={ item.title }/>
+                        </Link>
+                    </div>
+                    <div className='rightColumn'>
+                        <Link to={ `/${ item.id }-${ urlHelper.slugify(item.title) }` }>
+                            <p className='listing-itemTitle'>{ item.title }</p>
+                        </Link>
+                        <p className='listing-itemPrice'>{ item.price.currency } { item.price.amount }</p>
+                    </div>
+                </li>
+              )) }
+          </ul>
+        );
+    }
+}
 
 const mapStateToProps = state => {
     return {
@@ -42,7 +49,7 @@ const mapStateToProps = state => {
     }
 };
 
-const withRedux = connect(mapStateToProps, null)(Listing);
-const component = withRouter(withRedux);
-
-export default component;
+export default compose(
+  connect(mapStateToProps, null),
+  withRouter
+)(Listing);

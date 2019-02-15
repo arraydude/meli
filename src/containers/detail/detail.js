@@ -1,15 +1,16 @@
+import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import { get } from '../../requests';
 import { connect } from 'react-redux';
 import { urls } from '../../reducers/items';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import { Grid, Row, Col, Image, Alert } from 'react-bootstrap';
 
 import './detail.css';
 
-class Detail extends Component {
+class Detail extends PureComponent {
     static PropTypes = {
         getItem: PropTypes.func,
         item: PropTypes.object
@@ -26,7 +27,7 @@ class Detail extends Component {
         this.translations = {
             'used': 'usado',
             'new': 'nuevo'
-        }
+        };
     }
 
     componentWillMount() {
@@ -67,9 +68,9 @@ class Detail extends Component {
     }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = ({ items }, ownProps) => {
     return {
-        item: state.items.elements.find(item => item.id === ownProps.match.params.id)
+        item: items.elements.find(item => item.id === ownProps.match.params.id)
     };
 };
 
@@ -79,7 +80,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     };
 };
 
-const withRedux = connect(mapStateToProps, mapDispatchToProps)(Detail);
-const component = withRouter(withRedux);
-
-export default component;
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter
+)(Detail);

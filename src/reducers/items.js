@@ -15,30 +15,30 @@ export const urls = {
 
 const transformItems = (state, action) => {
     const { items, categories } = action.data;
-    const listing = action.data.items.slice(0, config.numberOfItems).map(item => item.id);
-    const transformed = Object.assign({}, action, {
+    const listing = items.slice(0, config.numberOfItems).map(item => item.id);
+    const transformed = {
+        ...action,
         data: {
             listing,
             elements: [...state.elements, ...items],
             categories
         }
-    });
+    };
 
     return reducer(state, transformed);
 };
 
 const transformItem = (state, action) => {
+    const newState = { ...state };
     const itemIndex = state.elements.findIndex(item => item.id === action.data.id);
 
     if(itemIndex<0) {
-        state.elements.push(action.data);
+        newState.elements = [ ...newState.elements, action.data ];
     } else {
-        state.elements[ itemIndex ].description = action.data.description;
+        newState.elements[ itemIndex ].description = action.data.description;
     }
 
-    action.data = {};
-
-    return reducer(state, action);
+    return reducer(state, { ...action, data: {} });
 };
 
 export default (state = initialStateBase, action) => {
