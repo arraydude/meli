@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "apicache": "^1.1.0",
-    "bootstrap": "3.4.0",
+    "bootstrap": "3.4.1",
     "express": "^4.16.2",
     "fetch-ponyfill": "^4.1.0",
     "history": "^4.7.2",
