@@ -10,7 +10,7 @@ import { Grid, Row, Col, Image, Alert } from 'react-bootstrap';
 import './detail.css';
 
 class Detail extends Component {
-    static PropTypes = {
+    static propTypes = {
         getItem: PropTypes.func,
         item: PropTypes.object
     };

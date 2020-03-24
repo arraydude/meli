@@ -14,7 +14,7 @@ import NotFound from './containers/notFound/notFound';
 import './index.css';
 
 class App extends Component {
-    static PropTypes = {
+    static propTypes = {
         config: PropTypes.object.isRequired,
         isFetching: PropTypes.bool
     };
