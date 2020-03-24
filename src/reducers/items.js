@@ -16,13 +16,14 @@ export const urls = {
 const transformItems = (state, action) => {
     const { items, categories } = action.data;
     const listing = action.data.items.slice(0, config.numberOfItems).map(item => item.id);
-    const transformed = Object.assign({}, action, {
+    const transformed = {
+        ...action,
         data: {
             listing,
             elements: [...state.elements, ...items],
             categories
         }
-    });
+    };
 
     return reducer(state, transformed);
 };

@@ -2,14 +2,14 @@ import PropTypes from 'prop-types';
 import { get } from '../../requests';
 import { connect } from 'react-redux';
 import { urls } from '../../reducers/items';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 
 import { Grid, Row, Col, Image, Alert } from 'react-bootstrap';
 
 import './detail.css';
 
-class Detail extends Component {
+class Detail extends PureComponent {
     static propTypes = {
         getItem: PropTypes.func,
         item: PropTypes.object
@@ -20,13 +20,9 @@ class Detail extends Component {
         item: {}
     };
 
-    constructor(props) {
-        super(props);
-
-        this.translations = {
-            'used': 'usado',
-            'new': 'nuevo'
-        }
+    translations = {
+        'used': 'usado',
+        'new': 'nuevo'
     }
 
     componentWillMount() {

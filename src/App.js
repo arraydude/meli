@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 import Header from './components/header/header';
@@ -13,7 +13,7 @@ import NotFound from './containers/notFound/notFound';
 
 import './index.css';
 
-class App extends Component {
+class App extends PureComponent {
     static propTypes = {
         config: PropTypes.object.isRequired,
         isFetching: PropTypes.bool

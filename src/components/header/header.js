@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { get } from '../../requests';
@@ -12,7 +12,7 @@ import Search from '../search/search';
 import logo from './assets/Logo_ML.png';
 import './header.css';
 
-class Header extends Component {
+class Header extends PureComponent {
     static propTypes = {
         getItems: PropTypes.func,
         history: PropTypes.object.isRequired
@@ -22,15 +22,7 @@ class Header extends Component {
         getItems: () => {}
     };
 
-    constructor() {
-        super();
-
-        this.bindings = {
-            onChangeSearch: this.onChangeSearch.bind(this)
-        };
-    }
-
-    onChangeSearch(value) {
+    onChangeSearch = (value) => {
         this.props.getItems(value);
         this.props.history.push('/');
     }
@@ -44,7 +36,7 @@ class Header extends Component {
                     </Link>
                 </Navbar.Brand>
                 <Navbar.Form className="form-inline header-form">
-                    <Search onChange={ this.bindings.onChangeSearch } />
+                    <Search onChange={ this.onChangeSearch } />
                 </Navbar.Form>
             </header>
         );

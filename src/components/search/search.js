@@ -1,40 +1,30 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import { FormGroup, InputGroup, FormControl, Button } from 'react-bootstrap';
 
 import searchIcon from './assets/ic_Search.png';
 
-class Search extends Component {
+class Search extends PureComponent {
     static propTypes = {
         onChange: PropTypes.func
     };
 
-    constructor(props) {
-        super(props);
-
-        this.bindings = {
-            handleChange: this.handleChange.bind(this),
-            handleKeyPress: this.handleKeyPress.bind(this),
-            handleSubmit: this.handleSubmit.bind(this)
-        };
-
-        this.state = {
-            value: ''
-        };
+    state = {
+        value: '',
     }
 
-    handleChange(e) {
+    handleChange = (e) => {
         this.setState({ value: e.target.value });
     }
 
-    handleKeyPress(target) {
+    handleKeyPress = (target) => {
         if (target.charCode === 13) {
             this.handleSubmit();
         }
     }
 
-    handleSubmit() {
+    handleSubmit = () => {
         const { value } = this.state;
 
         this.props.onChange(value);
@@ -48,11 +38,11 @@ class Search extends Component {
                                  type="text"
                                  placeholder="Nunca dejes de buscar"
                                  value={this.state.value}
-                                 onChange={this.bindings.handleChange}
-                                 onKeyPress={this.bindings.handleKeyPress}
+                                 onChange={this.handleChange}
+                                 onKeyPress={this.handleKeyPress}
                     />
                     <InputGroup.Button>
-                        <Button onClick={this.bindings.handleSubmit}>
+                        <Button onClick={this.handleSubmit}>
                             <img src={searchIcon} alt="Search"/>
                         </Button>
                     </InputGroup.Button>
